@@ -27,7 +27,7 @@
 
 - `emailProductDetails(email: String): void`
 
-# Browser
+# BrowserManager
 
 - **instance : BrowserContext**
 
