@@ -1,7 +1,3 @@
-//TODO: chatGPT fez essa BOMBA de código, revisar e testar isso
-
-//TODO: montar um package
-
 import com.microsoft.playwright.*;
 
 import java.util.ArrayList;
@@ -24,14 +20,12 @@ public class ProductSelector {
         BrowserContext browserContext = browserManager.getBrowserContext();
 
         // Create a new page within the browser context
-        Page page = browserContext.newPage();
-
-        try {
-            // Assuming the website has a search bar with the id "searchBar"
-            page.navigate("https://www.example.com"); // Replace with the actual website URL
+        try (Page page = browserContext.newPage()) {
+            // Navigate to eBay website
+            page.navigate("https://www.ebay.com");
 
             // Type the keywords into the search bar
-            page.fill("#searchBar", keywords);
+            page.fill("input[type='text'][name='_nkw']", keywords);
 
             // Press Enter to perform the search
             page.keyboard().press("Enter");
@@ -41,36 +35,28 @@ public class ProductSelector {
 
             // Select the top n products
             for (int i = 1; i <= n; i++) {
-                // Assuming the product links are displayed in a list with class "product-list-item"
-                String productSelector = ".product-list-item:nth-child(" + i + ") a";
-                ElementHandle productLink = page.querySelector(productSelector);
+                // Assuming the product links are displayed in a list with class "s-item"
+                String productSelector = ".s-item:nth-child(" + i + ")";
+                ElementHandle product = page.querySelector(productSelector);
 
-                if (productLink != null) {
-                    // Click on the product link to open the details
-                    productLink.click();
-
-                    // Wait for the product details page to load (you may need to adjust the wait time)
-                    page.waitForTimeout(3000);
-
+                if (product != null) {
                     // Extract product details
-                    String title = page.title();
-                    String price = (String) page.
-                            evaluate("() => document.querySelector('.product-price').textContent");
+                    String title = product.querySelector(".s-item__title").innerText();
+                    System.out.print(title);
+                    String price = product.querySelector(".s-item__price").innerText();
+                    System.out.print(price);
 
                     // Create a Product object and add it to the selected products list
-                    Product product = new Product(title, Double.parseDouble(price));
-                    selectedProducts.add(product);
-
-                    // Navigate back to the search results page for the next iteration
-                    page.goBack();
-
-                    // Wait for the search results page to load again
-                    page.waitForTimeout(3000);
+                    Product selectedProduct = new Product(title, parsePrice(price));
+                    selectedProducts.add(selectedProduct);
                 }
             }
-        } finally {
-            // Close the page after selecting products
-            page.close();
         }
+    }
+
+    private double parsePrice(String price) {
+        // Extract the numeric part of the price and convert it to a double
+        String numericPart = price.replaceAll("[^\\d.]", "");
+        return Double.parseDouble(numericPart);
     }
 }

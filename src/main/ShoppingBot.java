@@ -22,12 +22,6 @@ public class ShoppingBot {
         Scanner scanner = new Scanner(System.in);
 
         try {
-            System.out.print("Enter the shopping website URL (e.g., www.amazon.com): ");
-            String websiteURL = scanner.nextLine();
-
-            // Assuming the user enters the website URL
-            browserManager.getBrowser().newPage().navigate(websiteURL);
-
             System.out.print("Enter keywords to search for products: ");
             String keywords = scanner.nextLine();
 

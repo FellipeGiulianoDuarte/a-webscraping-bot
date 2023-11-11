@@ -35,15 +35,18 @@ public class BrowserManager {
         }
     }
 
-    //TODO: entender pq q essa porra não funciona
     public static void main(String[] args) {
 
-        //teste provisório
+        //teste funcionando
         Playwright playwright = Playwright.create();
-        Browser browser = playwright.chromium().launch();
+        Browser browser = playwright.chromium().launch(
+                new BrowserType.LaunchOptions().setHeadless(false)
+        );
         Page page = browser.newPage();
-        page.navigate("https://www.google.com");
+        page.navigate("https://www.ebay.com");
+        System.out.println("Page title: " + page.title());
 
+        //-------------------------
 
         /*BrowserManager browserManager = new BrowserManager();
         BrowserContext browserContext = browserManager.getBrowserContext();
@@ -52,9 +55,9 @@ public class BrowserManager {
         Page page = browserContext.newPage();
 
         // Navigate to Google
-        page.navigate("https://www.google.com");*/
+        page.navigate("https://www.google.com");
 
-        /*// Wait for the search input to be available
+        // Wait for the search input to be available
         page.waitForSelector("input[name='q']");
 
         ElementHandle searchInput = page.querySelector("input[name='q']");
