@@ -19,14 +19,4 @@ public class Product {
     public String getPrice() {
         return price;
     }
-
-/*    // Main method (for testing)
-    public static void main(String[] args) {
-        // Creating an instance of Product
-        Product laptop = new Product("Laptop", 999.99);
-
-        // Accessing and printing the product details
-        System.out.println("Product Title: " + laptop.getTitle());
-        System.out.println("Product Price: $" + laptop.getPrice());
-    }*/
 }

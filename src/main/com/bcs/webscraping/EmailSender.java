@@ -27,9 +27,8 @@ public class EmailSender {
         // Assuming you have a method to format the email content
         String emailContent = formatEmailContent();
 
-        //TODO: TIRAR A PORRA DO MEU EMAIL DAQUI
-        String senderEmail = "fellipe.giuliano03@gmail.com";
-        String senderPassword = "fuim fmuy qdfs xnyx";
+        String senderEmail = "youremail@gmail.com";
+        String senderPassword = "yourpassword";
         String host = "smtp.gmail.com";
 
         // Set the properties for the JavaMail session
@@ -78,24 +77,4 @@ public class EmailSender {
 
         return contentBuilder.toString();
     }
-
-/*    public static void main(String[] args) {
-        // Create an instance of EmailSender
-        EmailSender emailSender = new EmailSender();
-
-        // Create a list of dummy products for testing
-        List<Product> dummyProducts = new ArrayList<>();
-        dummyProducts.add(new Product("Dummy Product 1", 29.99));
-        dummyProducts.add(new Product("Dummy Product 2", 49.99));
-        dummyProducts.add(new Product("Dummy Product 3", 19.99));
-        emailSender.setSelectedProducts(dummyProducts);
-
-        // Set the email recipient (replace with your email)
-        emailSender.setEmailRecipient("fefellipe03@gmail.com");
-
-        // Test the emailProductDetails method
-        emailSender.emailProductDetails(emailSender.userEmail);
-
-        System.out.println("Email sent successfully!");
-    }*/
 }
