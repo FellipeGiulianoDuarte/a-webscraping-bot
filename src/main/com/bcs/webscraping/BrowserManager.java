@@ -1,4 +1,4 @@
-//TODO: montar um package
+package com.bcs.webscraping;
 
 import com.microsoft.playwright.*;
 
@@ -15,7 +15,9 @@ public class BrowserManager {
         Playwright playwright = Playwright.create();
 
         // Launch a new browser instance
-        browser = playwright.chromium().launch();
+        browser = playwright.chromium().launch(
+                new BrowserType.LaunchOptions().setHeadless(false)
+        );
 
         // Create a new browser context
         browserContext = browser.newContext();
@@ -35,7 +37,7 @@ public class BrowserManager {
         }
     }
 
-    public static void main(String[] args) {
+/*    public static void main(String[] args) {
 
         //teste funcionando
         Playwright playwright = Playwright.create();
@@ -43,12 +45,12 @@ public class BrowserManager {
                 new BrowserType.LaunchOptions().setHeadless(false)
         );
         Page page = browser.newPage();
-        page.navigate("https://www.ebay.com");
+        page.navigate("https://www.google.com");
         System.out.println("Page title: " + page.title());
 
         //-------------------------
 
-        /*BrowserManager browserManager = new BrowserManager();
+        BrowserManager browserManager = new BrowserManager();
         BrowserContext browserContext = browserManager.getBrowserContext();
 
         // Create a new page within the browser context
@@ -70,8 +72,8 @@ public class BrowserManager {
         page.waitForLoadState();
 
         // Output the title of the page
-        System.out.println("Page title: " + page.title());*/
+        System.out.println("Page title: " + page.title());
 
         //browserManager.closeBrowser();
-    }
+    }*/
 }

@@ -1,6 +1,4 @@
-//TODO: chatGPT fez essa BOMBA de código, revisar e testar isso
-
-//TODO: montar um package
+package com.bcs.webscraping;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -9,9 +7,9 @@ import java.util.List;
 import java.util.Properties;
 
 public class EmailSender {
-    private String userEmail;
+    String userEmail;
 
-    private List<Product> selectedProducts;
+    List<Product> selectedProducts;
 
     public EmailSender() {
     }
@@ -25,13 +23,13 @@ public class EmailSender {
         this.userEmail = userEmail;
     }
 
-    public void emailProductDetails(String email) {
+    public void emailProductDetails() {
         // Assuming you have a method to format the email content
         String emailContent = formatEmailContent();
 
         //TODO: TIRAR A PORRA DO MEU EMAIL DAQUI
-        String senderEmail = "";
-        String senderPassword = "";
+        String senderEmail = "fellipe.giuliano03@gmail.com";
+        String senderPassword = "fuim fmuy qdfs xnyx";
         String host = "smtp.gmail.com";
 
         // Set the properties for the JavaMail session
@@ -54,7 +52,7 @@ public class EmailSender {
 
             // Set the sender and recipient addresses
             message.setFrom(new InternetAddress(senderEmail));
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(this.userEmail));
 
             // Set the email subject and content
             message.setSubject("Product Details");
@@ -63,17 +61,17 @@ public class EmailSender {
             // Send the message
             Transport.send(message);
 
-            System.out.println("Email sent successfully to " + email);
+            System.out.println("Email sent successfully to " + this.userEmail);
         } catch (MessagingException mex) {
             mex.printStackTrace();
         }
     }
 
-    private String formatEmailContent() {
+    String formatEmailContent() {
         StringBuilder contentBuilder = new StringBuilder();
         contentBuilder.append("Product Details:\n\n");
 
-        for (Product product : selectedProducts) {
+        for (Product product : this.selectedProducts) {
             contentBuilder.append("Title: ").append(product.getTitle()).append("\n");
             contentBuilder.append("Price: ").append(product.getPrice()).append("\n\n");
         }

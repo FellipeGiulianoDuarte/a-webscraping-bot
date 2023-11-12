@@ -1,12 +1,12 @@
-//TODO: montar um package
+package com.bcs.webscraping;
 
 public class Product {
     // Fields
     private String title;
-    private double price;
+    private String price;
 
     // Constructors
-    public Product(String title, double price) {
+    public Product(String title, String price) {
         this.title = title;
         this.price = price;
     }
@@ -16,12 +16,11 @@ public class Product {
         return title;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
 /*    // Main method (for testing)
-      //TODO: testar essa joça
     public static void main(String[] args) {
         // Creating an instance of Product
         Product laptop = new Product("Laptop", 999.99);
